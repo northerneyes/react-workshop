@@ -1,5 +1,5 @@
 const initialState = {
-  list: [],
+  items: [],
   failReason: {},
   currentPage: 1,
   totalPages: 0,
@@ -14,10 +14,10 @@ export default (state = initialState, action) => {
 
     case 'GET_NEWS_SUCCESS': {
       const { news } = action.payload;
-      return { ...state, news, loading: false };
+      return { ...state, ...news, loading: false };
     }
     case 'GET_NEWS_FAIL': {
-      const { error } = action.payload;
+      const error = action.payload;
       return { ...state, loading: false, error };
     }
     default:

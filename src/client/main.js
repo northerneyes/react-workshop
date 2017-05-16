@@ -8,10 +8,13 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 import createStore from '../common/store';
 import App from './pages/App';
+import rootSaga from '../common/sagas';
 
 const initialState = window.__INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
 const store = createStore(initialState);
 const history = createBrowserHistory();
+
+store.runSaga(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
