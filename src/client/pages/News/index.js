@@ -1,5 +1,5 @@
 import React from 'react';
-import { array } from 'prop-types';
+import { object } from 'prop-types';
 import { Panel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';

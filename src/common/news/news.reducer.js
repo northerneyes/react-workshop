@@ -13,12 +13,12 @@ export default (state = initialState, action) => {
     }
 
     case 'GET_NEWS_SUCCESS': {
-      const { news} = action.payload;
+      const { news } = action.payload;
       return { ...state, news, loading: false };
     }
     case 'GET_NEWS_FAIL': {
-      const {error} = action.payload;
-      return {...state, loading: false, error}
+      const { error } = action.payload;
+      return { ...state, loading: false, error };
     }
     default:
       return state;
