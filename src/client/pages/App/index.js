@@ -1,5 +1,6 @@
 import React from 'react';
 import { object } from 'prop-types';
+import start from '../../start';
 
 import {
   FormattedMessage,
@@ -91,4 +92,4 @@ App.contextTypes = {
   intl: object
 };
 
-export default App;
+export default start(App);

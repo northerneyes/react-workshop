@@ -17,9 +17,13 @@ const messages = loadMessages();
 const app = express();
 app.use('/assets', express.static('build', { maxAge: '200d' }));
 
-function renderApp(store) {
+function renderApp(store, { defaultLocale, currentLocale }) {
   return ReactDOMServer.renderToString(
-    <IntlProvider>
+    <IntlProvider
+      defaultLocale={defaultLocale}
+      key={currentLocale} // https://github.com/yahoo/react-intl/issues/234
+      locale={currentLocale}
+      messages={messages}>
       <Provider store={store}>
         <App />
       </Provider>
@@ -51,7 +55,7 @@ async function render(req, res) {
   const initialState = getInitialState(req);
   const store = createStore(initialState);
 
-  const html = renderApp(store, req);
+  const html = renderApp(store, initialState.intl, req);
 
   const { javascript: mainScripts } = global.webpackIsomorphicTools.assets();
 

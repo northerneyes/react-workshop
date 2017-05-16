@@ -86,7 +86,7 @@ module.exports = {
                   }
                 ]
               ],
-              plugins: [hmrPlugin]
+              plugins: [hmrPlugin, 'transform-object-rest-spread']
             }
           }
         ]

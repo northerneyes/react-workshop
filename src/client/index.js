@@ -1,21 +1,11 @@
-/* global window, document */
+require('intl');
+require('intl/locale-data/jsonp/en.js');
+require('intl/locale-data/jsonp/ru.js');
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { IntlProvider } from 'react-intl';
+const { addLocaleData } = require('react-intl');
+const en = require('react-intl/locale-data/en');
+const ru = require('react-intl/locale-data/ru');
 
-import App from './pages/App';
+[en, ru].forEach(locale => addLocaleData(locale));
 
-const initialState = window.__INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
-
-console.log('initialState', initialState);
-
-ReactDOM.render(
-  <IntlProvider locale="en">
-    <App />
-  </IntlProvider>,
-  document.getElementById('app'),
-  () => {
-    delete window.__INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
-  }
-);
+require('./main');
