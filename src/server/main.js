@@ -5,8 +5,11 @@ import winston from 'winston';
 import ReactDOMServer from 'react-dom/server';
 import { IntlProvider } from 'react-intl';
 
+import loadMessages from './intl/loadMessages';
 import App from '../client/pages/App';
 import Html from './Html';
+
+const messages = loadMessages();
 
 const app = express();
 app.use('/assets', express.static('build', { maxAge: '200d' }));
