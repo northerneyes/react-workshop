@@ -3,6 +3,7 @@
   "parser": "babel-eslint",
   "rules": {
     "comma-dangle": 0,
+    "react/forbid-prop-types": 0,
     "react/prefer-stateless-function": 0,
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "react/jsx-filename-extension": "off" // https://github.com/zeit/next.js/issues/200

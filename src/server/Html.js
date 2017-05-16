@@ -11,6 +11,7 @@ function Html(props) {
       </head>
       <body>
         <div id="app" dangerouslySetInnerHTML={{ __html: props.html }} />
+        <script dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__ = ${JSON.stringify(props.state)}` }} />
         <script src={`${props.mainScripts.app}`} />
       </body>
     </html>
@@ -19,7 +20,8 @@ function Html(props) {
 
 Html.propTypes = {
   html: string.isRequired,
-  mainScripts: object.isRequired // eslint-disable-line react/forbid-prop-types
+  state: object.isRequired,
+  mainScripts: object.isRequired
 };
 
 export default Html;
