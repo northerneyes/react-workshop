@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 import { getNews } from '../../../common/news/news.actions';
+import fetch from '../../fetch';
 
 export const msg = defineMessages({
   readmore: {
@@ -15,18 +16,17 @@ export const msg = defineMessages({
   }
 });
 
-class News extends React.Component {
-  constructor(props) {
-    super(props);
-    props.getNews();
-  }
+const fetchData = ({ dispatch }) =>
+  dispatch(getNews());
 
+class News extends React.Component {
   render() {
-    const { items } = this.props.news;
+    const { items, loading } = this.props.news;
 
     return (
       <div>
         <h1>Some big news</h1>
+        {loading && <div>loading...</div>}
         {items.map(({ title, description, link, pubDate }) => (
           <Panel key={title}>
             <h6>{format(parse(pubDate), 'MM/DD/YYYY')}</h6>
@@ -48,9 +48,11 @@ News.propTypes = {
   news: object.isRequired
 };
 
-export default connect(
+const ConnectedComponent = connect(
   state => ({
     news: state.news
   }),
   { getNews }
 )(News);
+
+export default fetch(fetchData)(ConnectedComponent);
