@@ -18,7 +18,7 @@ const asyncWriteFile = asyncFunc(fs.writeFile);
 async function getMessages() {
   const getReactIntlMessages = code =>
     babel.transform(code, {
-      plugins: ['react-intl'],
+      plugins: ['react-intl', 'transform-object-rest-spread'],
       presets: ['react', ['env', { targets: { node: true } }]]
     }).metadata['react-intl'].messages;
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { object } from 'prop-types';
-import start from '../../start';
 
 import {
   FormattedMessage,
@@ -10,26 +9,27 @@ import {
 } from 'react-intl';
 import { Grid, PageHeader, FormControl, Button } from 'react-bootstrap';
 
+import start from '../../start';
 import Header from '../../components/Header';
 
 export const msg = defineMessages({
   title: {
-    id: 'title',
+    id: 'app.title',
     defaultMessage: 'Building something interesting'
   },
   welcome: {
-    id: 'welcome',
+    id: 'app.welcome',
     defaultMessage: `Hello {name}, the date is {date}, you have {unreadCount, number} {unreadCount, plural,
       one {message}
       other {messages}
     } and a lot of money {money}`
   },
   inputText: {
-    id: 'inputText',
+    id: 'app.inputText',
     defaultMessage: 'Enter your text here'
   },
   clickMe: {
-    id: 'clickMe',
+    id: 'app.clickMe',
     defaultMessage: 'Click me'
   }
 });
