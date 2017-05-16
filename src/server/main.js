@@ -1,5 +1,4 @@
 import React from 'react';
-
 import express from 'express';
 import winston from 'winston';
 import { StaticRouter } from 'react-router-dom';
@@ -10,6 +9,9 @@ import { IntlProvider } from 'react-intl';
 import loadMessages from './intl/loadMessages';
 import App from '../client/pages/App';
 import Html from './Html';
+import rootSaga from '../common/sagas';
+
+import FetchProvider from '../client/FetchProvider';
 
 import createStore from '../common/store';
 
@@ -18,18 +20,20 @@ const messages = loadMessages();
 const app = express();
 app.use('/assets', express.static('build', { maxAge: '200d' }));
 
-function renderApp(store, { defaultLocale, currentLocale }, req) {
+function renderApp(store, { defaultLocale, currentLocale }, req, fetches) {
   return ReactDOMServer.renderToString(
     <IntlProvider
       defaultLocale={defaultLocale}
       key={currentLocale} // https://github.com/yahoo/react-intl/issues/234
       locale={currentLocale}
       messages={messages}>
-      <Provider store={store}>
-        <StaticRouter location={req.url} context={{}}>
-          <App />
-        </StaticRouter>
-      </Provider>
+      <FetchProvider fetches={fetches}>
+        <Provider store={store}>
+          <StaticRouter location={req.url} context={{}}>
+            <App />
+          </StaticRouter>
+        </Provider>
+      </FetchProvider>
     </IntlProvider>
   );
 }
@@ -56,7 +60,17 @@ function getInitialState(req) {
 
 async function render(req, res) {
   const initialState = getInitialState(req);
+
   const store = createStore(initialState);
+
+  // First render to collect all fetches
+  const saga = store.runSaga(rootSaga);
+  const fetches = [];
+  renderApp(store, initialState.intl, req, fetches);
+
+  const promises = [...fetches.map(fetch => fetch(store)), saga.done];
+  store.close();
+  await Promise.all(promises);
 
   const html = renderApp(store, initialState.intl, req);
 

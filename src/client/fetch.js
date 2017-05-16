@@ -20,10 +20,10 @@ export default function fetch(fn) {
       }
 
       componentDidMount() {
-        // if (!window.__INITIAL_STATE__) {
+        if (!window.__INITIAL_STATE__) {
           // eslint-disable-line no-underscore-dangle
           fn(this.context.store, this.props);
-        // }
+        }
       }
 
       render() {

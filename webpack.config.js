@@ -100,6 +100,11 @@ module.exports = {
     // enable HMR globally
 
     new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        IS_BROWSER: true
+      }
+    }),
     // prints more readable module names in the browser console on HMR updates
 
     webpackIsomorphicToolsPlugin.development()
