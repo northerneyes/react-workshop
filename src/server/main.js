@@ -3,6 +3,7 @@ import React from 'react';
 import express from 'express';
 import winston from 'winston';
 import ReactDOMServer from 'react-dom/server';
+import { IntlProvider } from 'react-intl';
 
 import App from '../client/pages/App';
 import Html from './Html';
@@ -12,7 +13,9 @@ app.use('/assets', express.static('build', { maxAge: '200d' }));
 
 function renderApp() {
   return ReactDOMServer.renderToString(
-    <App />,
+    <IntlProvider locale="en">
+      <App />
+    </IntlProvider>,
   );
 }
 
