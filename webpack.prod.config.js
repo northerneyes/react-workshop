@@ -3,14 +3,19 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
+const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+const webpackIsomorphicAssets = require('./assets');
+
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
+
 module.exports = {
   entry: {
     app: './src/client/index.js'
   },
   output: {
-    filename: '[name].js',
+    filename: '[name]-[chunkhash].js',
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/'
+    publicPath: '/assets/'
   },
   module: {
     rules: [
@@ -88,6 +93,7 @@ module.exports = {
         warnings: false // Because uglify reports irrelevant warnings.
       }
     }),
+    webpackIsomorphicToolsPlugin,
     new ProgressBarPlugin()
   ]
 };

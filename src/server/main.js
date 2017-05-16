@@ -19,9 +19,18 @@ function renderApp() {
 async function render(req, res) {
   const html = renderApp(req);
 
+  const {
+    javascript: mainScripts
+  } = global.webpackIsomorphicTools.assets();
+
+  if (process.NODE_ENV !== 'production') {
+    global.webpackIsomorphicTools.refresh();
+  }
+
   const markup = ReactDOMServer.renderToString(
     <Html
       html={html}
+      mainScripts={mainScripts}
     />,
   );
 

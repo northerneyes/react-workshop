@@ -1,6 +1,7 @@
 .idea
 node_modules
 
+webpack-assets.json
 /build
 *.log
 *.sublime-project

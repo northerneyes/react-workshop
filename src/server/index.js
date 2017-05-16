@@ -5,4 +5,11 @@ require('babel-register')({
   ],
 });
 
-require('./main');
+const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
+const webpackIsomorphicAssets = require('../../assets');
+const rootDir = require('path').resolve(__dirname, '../..');
+
+global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicAssets).server(rootDir, () => {
+  require('./main');
+});
+
