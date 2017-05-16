@@ -10,6 +10,14 @@ export const msg = defineMessages({
   title: {
     id: 'header.title',
     defaultMessage: 'React workshop'
+  },
+  localization: {
+    id: 'header.localization',
+    defaultMessage: 'Localization'
+  },
+  news: {
+    id: 'header.news',
+    defaultMessage: 'News'
   }
 });
 
@@ -27,10 +35,14 @@ class Header extends React.Component {
           <Nav>
             <LinkContainer to="/localization">
               <NavItem>
-                Localization
+                <FormattedMessage {...msg.localization} />
               </NavItem>
             </LinkContainer>
-            <NavItem eventKey={2} href="#">Link</NavItem>
+            <LinkContainer to="/news">
+              <NavItem>
+                <FormattedMessage {...msg.news} />
+              </NavItem>
+            </LinkContainer>
           </Nav>
           <Nav pullRight>
             <SwitchLocale />

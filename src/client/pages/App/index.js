@@ -11,6 +11,7 @@ import { Grid, PageHeader } from 'react-bootstrap';
 import start from '../../start';
 import Header from '../../components/Header';
 import Localization from '../Localization';
+import News from '../News';
 
 export const msg = defineMessages({
   title: {
@@ -31,6 +32,7 @@ class App extends React.Component {
         </PageHeader>
         <Grid>
           <Route exact path="/localization" component={Localization} />
+          <Route exact path="/news" component={News} />
         </Grid>
       </div>
     );
