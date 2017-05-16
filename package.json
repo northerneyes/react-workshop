@@ -1,0 +1,38 @@
+{
+  "name": "react-workshop",
+  "version": "1.0.0",
+  "description": "Playground for react-workshop",
+  "author": "George Bukhanov",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server",
+    "build": "rimraf ./build && NODE_ENV=production webpack --config webpack.prod.config.js"
+  },
+  "dependencies": {
+    "babel-core": "6.24.1",
+    "babel-loader": "6.4.1",
+    "babel-polyfill": "6.23.0",
+    "babel-preset-env": "1.3.3",
+    "babel-preset-react": "6.24.1",
+    "babel-register": "6.24.1",
+    "express": "^4.15.2",
+    "prop-types": "15.5.7",
+    "react": "15.5.3",
+    "react-dom": "15.5.3",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "7.2.1",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.10.3",
+    "extract-text-webpack-plugin": "2.0.0-rc.3",
+    "nodemon": "1.11.0",
+    "npm-run-all": "4.0.2",
+    "progress-bar-webpack-plugin": "^1.9.3",
+    "rimraf": "^2.6.1",
+    "webpack": "2.3.3"
+  }
+}
