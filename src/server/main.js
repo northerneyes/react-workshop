@@ -2,6 +2,7 @@ import React from 'react';
 
 import express from 'express';
 import winston from 'winston';
+import { StaticRouter } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
@@ -17,7 +18,7 @@ const messages = loadMessages();
 const app = express();
 app.use('/assets', express.static('build', { maxAge: '200d' }));
 
-function renderApp(store, { defaultLocale, currentLocale }) {
+function renderApp(store, { defaultLocale, currentLocale }, req) {
   return ReactDOMServer.renderToString(
     <IntlProvider
       defaultLocale={defaultLocale}
@@ -25,7 +26,9 @@ function renderApp(store, { defaultLocale, currentLocale }) {
       locale={currentLocale}
       messages={messages}>
       <Provider store={store}>
-        <App />
+        <StaticRouter location={req.url} context={{}}>
+          <App />
+        </StaticRouter>
       </Provider>
     </IntlProvider>
   );

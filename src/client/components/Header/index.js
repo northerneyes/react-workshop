@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-
+import { LinkContainer } from 'react-router-bootstrap';
+import { withRouter, Link } from 'react-router-dom';
 import { FormattedMessage, defineMessages } from 'react-intl';
 
 import SwitchLocale from '../SwitchLocale';
@@ -12,21 +13,23 @@ export const msg = defineMessages({
   }
 });
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   render() {
     return (
       <Navbar staticTop inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">
-              <FormattedMessage {...msg.title} />
-            </a>
+            <Link to="/"><FormattedMessage {...msg.title} /></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1} href="#">Localization</NavItem>
+            <LinkContainer to="/localization">
+              <NavItem>
+                Localization
+              </NavItem>
+            </LinkContainer>
             <NavItem eventKey={2} href="#">Link</NavItem>
           </Nav>
           <Nav pullRight>
@@ -37,3 +40,5 @@ export default class Header extends React.Component {
     );
   }
 }
+
+export default withRouter(Header);
